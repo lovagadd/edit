@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Min Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .thumb {
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .thumb:hover {
+      transform: scale(1.02);
+    }
+    .thumb img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .overlay video {
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    .overlay.active {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="thumb" onclick="playVideo('videos/film1.mp4')">
+      <img src="thumbnails/film1.jpg" alt="Film 1">
+    </div>
+    <div class="thumb" onclick="playVideo('videos/film2.mp4')">
+      <img src="thumbnails/film2.jpg" alt="Film 2">
+    </div>
+    <!-- Lägg till fler thumbnails här -->
+  </div>
+
+  <div class="overlay" id="videoOverlay" onclick="closeVideo()">
+    <video id="overlayVideo" controls autoplay></video>
+  </div>
+
+  <script>
+    function playVideo(src) {
+      const overlay = document.getElementById('videoOverlay');
+      const video = document.getElementById('overlayVideo');
+      video.src = src;
+      overlay.classList.add('active');
+      video.play();
+    }
+    function closeVideo() {
+      const overlay = document.getElementById('videoOverlay');
+      const video = document.getElementById('overlayVideo');
+      video.pause();
+      video.currentTime = 0;
+      video.src = '';
+      overlay.classList.remove('active');
+    }
+  </script>
+</body>
+</html>
