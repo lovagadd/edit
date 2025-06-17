@@ -10,7 +10,7 @@
       font-family: sans-serif;
       background-color: #f9f9f9;
     }
-    .grid {
+    .desktop-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1rem;
@@ -48,17 +48,49 @@
     .overlay.active {
       display: flex;
     }
+
+    .mobile-scroll {
+      display: none;
+      padding: 1rem;
+    }
+    .vertical-video {
+      width: 100vw;
+      height: auto;
+      display: block;
+      margin-bottom: 1rem;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-grid {
+        display: none;
+      }
+      .mobile-scroll {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="grid">
-    <div class="thumb" onclick="playVideo('videos/film1.mp4')">
+  <!-- Desktop grid version -->
+  <div class="desktop-grid">
+    <div class="thumb" onclick="playVideo('videos/film1-horizontal.mp4')">
       <img src="thumbnails/film1.jpg" alt="Film 1">
     </div>
-    <div class="thumb" onclick="playVideo('videos/film2.mp4')">
+    <div class="thumb" onclick="playVideo('videos/film2-horizontal.mp4')">
       <img src="thumbnails/film2.jpg" alt="Film 2">
     </div>
     <!-- Lägg till fler thumbnails här -->
+  </div>
+
+  <!-- Mobile autoplay scroll version -->
+  <div class="mobile-scroll">
+    <video class="vertical-video" playsinline autoplay muted loop>
+      <source src="videos/film1-vertical.mp4" type="video/mp4">
+    </video>
+    <video class="vertical-video" playsinline autoplay muted loop>
+      <source src="videos/film2-vertical.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="overlay" id="videoOverlay" onclick="closeVideo()">
